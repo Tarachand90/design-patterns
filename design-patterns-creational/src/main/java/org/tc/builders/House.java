@@ -37,15 +37,17 @@ public class House {
         private boolean hasSwimmingPool;
 
         // Step-by-step configuration methods
-        public Builder setRooms(int rooms) {
-            this.rooms = rooms;
-            return this;
-        }
+       public Builder(int rooms, int bathrooms) {
+           if(rooms <= 0) {
+               throw new IllegalArgumentException("Rooms must be greater than 0.");
+           }
 
-        public Builder setBathrooms(int bathrooms) {
-            this.bathrooms = bathrooms;
-            return this;
-        }
+           if(bathrooms <= 0) {
+               throw new IllegalArgumentException("Bathrooms must be greater than 0.");
+           }
+           this.rooms = rooms;
+           this.bathrooms = bathrooms;
+       }
 
         public Builder setGarage(boolean hasGarage) {
             this.hasGarage = hasGarage;
