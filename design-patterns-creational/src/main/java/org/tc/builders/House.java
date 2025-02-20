@@ -1,5 +1,9 @@
 package org.tc.builders;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class House {
 
     private final int rooms;  //required
@@ -7,14 +11,17 @@ public class House {
     private final boolean hasGarage; //Optional
     private final boolean hasGarden; //Optional
     private final boolean hasSwimmingPool; //Optional
-
+    private final List<Room> roomList;
     // Private constructor ensures objects can only be created via the Builder
     private House(Builder builder) {
         this.rooms = builder.rooms;
         this.bathrooms = builder.bathrooms;
         this.hasGarage = builder.hasGarage;
         this.hasGarden = builder.hasGarden;
-        this.hasSwimmingPool = builder.hasSwimmingPool;;
+        this.hasSwimmingPool = builder.hasSwimmingPool;
+        // Deep copy: Create a new list and add each element from the original list
+        this.roomList = Collections.unmodifiableList(
+                new ArrayList<>(builder.roomList));
     }
 
     @Override
@@ -25,6 +32,7 @@ public class House {
                 ", hasGarage=" + hasGarage +
                 ", hasGarden=" + hasGarden +
                 ", hasSwimmingPool=" + hasSwimmingPool +
+                "roomList="+roomList+
                 '}';
     }
 
@@ -36,6 +44,7 @@ public class House {
         private boolean hasGarden;
         private boolean hasSwimmingPool;
 
+        private  List<Room> roomList;
         // Step-by-step configuration methods
        public Builder(int rooms, int bathrooms) {
            if(rooms <= 0) {
@@ -47,6 +56,7 @@ public class House {
            }
            this.rooms = rooms;
            this.bathrooms = bathrooms;
+           this.roomList = new ArrayList<>();
        }
 
         public Builder setGarage(boolean hasGarage) {
@@ -68,9 +78,21 @@ public class House {
             return this;
         }
 
+        public Builder addRoom(Room room) {
+           if(room == null) {
+               throw new IllegalArgumentException("Room cannot be null.");
+           }
+           roomList.add(room);
+           return this;
+        }
+
         public House build() {
             if (hasSwimmingPool && !hasGarden) {
                 throw new IllegalArgumentException("A house with a swimming pool must have a garden.");
+            }
+
+            if(roomList.size() != rooms) {
+                throw new IllegalArgumentException("Number of rooms must match the specified rooms count.");
             }
             return new House(this);
         }
