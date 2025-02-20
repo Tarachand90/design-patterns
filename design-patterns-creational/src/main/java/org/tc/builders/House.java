@@ -55,16 +55,23 @@ public class House {
         }
 
         public Builder setGarden(boolean hasGarden) {
+           if(hasGarden && rooms < 2) {
+               throw new IllegalArgumentException("A house with a garage must have at least 2 rooms.");
+           }
             this.hasGarden = hasGarden;
             return this;
         }
 
         public Builder setSwimmingPool(boolean hasSwimmingPool) {
+
             this.hasSwimmingPool = hasSwimmingPool;
             return this;
         }
 
         public House build() {
+            if (hasSwimmingPool && !hasGarden) {
+                throw new IllegalArgumentException("A house with a swimming pool must have a garden.");
+            }
             return new House(this);
         }
     }
