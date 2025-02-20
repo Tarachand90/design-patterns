@@ -63,14 +63,15 @@ public class House {
         }
 
         public Builder setSwimmingPool(boolean hasSwimmingPool) {
-            if (hasSwimmingPool && !hasGarden) {
-                throw new IllegalArgumentException("A house with a swimming pool must have a garden.");
-            }
+
             this.hasSwimmingPool = hasSwimmingPool;
             return this;
         }
 
         public House build() {
+            if (hasSwimmingPool && !hasGarden) {
+                throw new IllegalArgumentException("A house with a swimming pool must have a garden.");
+            }
             return new House(this);
         }
     }
