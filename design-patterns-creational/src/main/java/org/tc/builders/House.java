@@ -32,6 +32,7 @@ public class House {
                 ", hasGarage=" + hasGarage +
                 ", hasGarden=" + hasGarden +
                 ", hasSwimmingPool=" + hasSwimmingPool +
+                "roomList="+roomList+
                 '}';
     }
 

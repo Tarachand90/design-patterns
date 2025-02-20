@@ -3,20 +3,29 @@ package org.tc.builders;
 public class HouseBuilderpatternTest {
 
     public static void main(String[] args) {
-        // Constructing a simple house with 3 rooms, 2bathrooms and a garage
-        House simpleHouse = new House.Builder(3, 2)
-                .setGarage(true)
+        // Build individual rooms using the Room.Builder
+        Room livingRoom = new Room.Builder()
+                .setName("Living Room")
+                .setSize(400)
                 .build();
-        System.out.println("Simple House: " + simpleHouse);
 
-        // Constructing a luxury house with a garden and swimming pool
-        //5 rooms, 4 bathrooms
-
-        House luxuryHouse = new House.Builder(5, 4)
-                .setGarage(true)
-                .setGarden(true)
-                .setSwimmingPool(true)
+        Room kitchen = new Room.Builder()
+                .setName("Kitchen")
+                .setSize(250)
                 .build();
-        System.out.println("Luxury House: " + luxuryHouse);
+
+        Room bedroom = new Room.Builder()
+                .setName("Bedroom")
+                .setSize(300)
+                .build();
+
+        // Build the house using the House.Builder and add rooms
+        House house = new House.Builder(3, 2)
+                .addRoom(livingRoom)
+                .addRoom(kitchen)
+                .addRoom(bedroom)
+                .build();
+
+        System.out.println(house);
     }
 }
