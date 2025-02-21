@@ -14,10 +14,10 @@ public class HouseBuilderpatternTest {
                 .setSize(250)
                 .build();
 
-        Room bedroom = new Room.Builder()
-                .setName("Bedroom")
-                .setSize(300)
-                .build();
+            Room bedroom = new Room.Builder()
+                    .setName("Bedroom")
+                    .setSize(300)
+                    .build();
 
 
         House house = new House.BuilderStep1(3, 2)
@@ -33,6 +33,22 @@ public class HouseBuilderpatternTest {
 
 
         System.out.println(house);
+
+        Room guestRoom = new Room.Builder()
+                .setName("Guest Room")
+                .setSize(30)
+                .build();
+
+
+        // Rebuilding house with extra room and bathroom
+        House house2 = House.BuilderStep1.rebuildWithChanges(house, 1, 1)
+                .setGarage(false)
+                .setSwimmingPool(true)
+                .finishOptions(house)
+                .addRoom(guestRoom)
+                .build();
+
+        System.out.println(house2);
 
     }
 }
