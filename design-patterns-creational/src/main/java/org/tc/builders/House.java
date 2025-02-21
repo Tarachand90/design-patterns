@@ -25,6 +25,10 @@ public class House {
                 new ArrayList<>(builder.roomList));
     }
 
+    public List<Room> getRoomList() {
+        return roomList;
+    }
+
     @Override
     public String toString() {
         return "House{" +
@@ -36,6 +40,7 @@ public class House {
                 "roomList="+roomList+
                 '}';
     }
+
     // Step 1: Set mandatory properties
     public static class BuilderStep1 {
         private int rooms;
@@ -55,6 +60,20 @@ public class House {
 
         public BuilderStep2 setMandatory() {
             return new BuilderStep2(rooms, bathrooms);
+        }
+
+        public static BuilderStep2 rebuildWithChanges(House house, int extraRooms, int extraBathrooms) {
+            if(extraRooms < 0) {
+                throw new IllegalArgumentException("Number of extra room can't be negative");
+            }
+
+            if(extraBathrooms < 0) {
+                throw new IllegalArgumentException("Number of extra Bathroom can't be negative");
+            }
+            return new BuilderStep2(house.rooms + extraRooms, house.bathrooms + extraBathrooms)
+                    .setGarage(house.hasGarage)
+                    .setGarden(house.hasGarden)
+                    .setSwimmingPool(house.hasSwimmingPool);
         }
     }
 
@@ -95,6 +114,11 @@ public class House {
         public BuilderStep3 finishOptions() {
             return new BuilderStep3(this);
         }
+
+        // Overloaded method to support modification of an existing house
+        public BuilderStep3 finishOptions(House house) {
+            return new BuilderStep3(this, house);
+        }
     }
 
     public static class BuilderStep3 {
@@ -115,6 +139,11 @@ public class House {
             this.roomList = new ArrayList<>();
         }
 
+        public BuilderStep3(BuilderStep2 builder, House house) {
+            this(builder);
+            this.roomList.addAll(house.getRoomList());
+        }
+
         public BuilderStep3 addRoom(Room room) {
             if(room == null) {
                 throw new IllegalArgumentException("Room cannot be null.");
@@ -131,5 +160,7 @@ public class House {
 
             return new House(this);
         }
+
+        
     }
 }
