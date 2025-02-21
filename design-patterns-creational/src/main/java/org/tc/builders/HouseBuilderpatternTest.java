@@ -19,13 +19,20 @@ public class HouseBuilderpatternTest {
                 .setSize(300)
                 .build();
 
-        // Build the house using the House.Builder and add rooms
-        House house = new House.Builder(3, 2)
+
+        House house = new House.BuilderStep1(3, 2)
+                        .setMandatory()
+                        .setGarage(true)
+                        .setGarden(true)
+                .finishOptions()
                 .addRoom(livingRoom)
                 .addRoom(kitchen)
                 .addRoom(bedroom)
                 .build();
 
+
+
         System.out.println(house);
+
     }
 }
