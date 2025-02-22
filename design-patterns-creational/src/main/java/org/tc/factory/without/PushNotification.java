@@ -1,8 +1,6 @@
-package org.tc.factory;
+package org.tc.factory.without;
 
-public class PushNotification implements Notification{
-
-    @Override
+public class PushNotification {
     public void send(String message) {
         System.out.println("Sending Push Notification: " + message);
         // Real-world: Call Firebase Cloud Messaging (FCM) or APNs for iOS

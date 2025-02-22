@@ -1,8 +1,7 @@
-package org.tc.factory;
+package org.tc.factory.without;
 
-public class EmailNotification implements Notification{
+public class EmailNotification {
 
-    @Override
     public void send(String message) {
         System.out.println("Sending Email: " + message);
         // Real-world: Call an Email API like SendGrid or SMTP

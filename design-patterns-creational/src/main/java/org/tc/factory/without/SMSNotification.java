@@ -1,8 +1,7 @@
-package org.tc.factory;
+package org.tc.factory.without;
 
-public class SMSNotification implements Notification{
+public class SMSNotification {
 
-    @Override
     public void send(String message) {
         System.out.println("Sending SMS: " + message);
         // Real-world: Integrate with Twilio or another SMS API
