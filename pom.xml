@@ -18,6 +18,17 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.reflection.version>0.10.2</java.reflection.version>
     </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${java.reflection.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
 </project>
