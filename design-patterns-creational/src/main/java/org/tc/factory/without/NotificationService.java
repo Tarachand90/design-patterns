@@ -1,9 +1,5 @@
 package org.tc.factory.without;
 
-import org.tc.factory.EmailNotification;
-import org.tc.factory.PushNotification;
-import org.tc.factory.SMSNotification;
-
 public class NotificationService {
 
     public static void sendNotification(String type, String message) {

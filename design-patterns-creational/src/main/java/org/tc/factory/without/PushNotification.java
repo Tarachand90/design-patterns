@@ -1,4 +1,4 @@
-package org.tc.factory;
+package org.tc.factory.without;
 
 public class PushNotification {
     public void send(String message) {
