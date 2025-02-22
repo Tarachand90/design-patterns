@@ -1,6 +1,8 @@
-package org.tc.factory;
+package org.tc.factory.methods;
 
-public class SMSNotification implements Notification{
+import org.tc.factory.simple.Notification;
+
+public class SMSNotification implements Notification {
 
     @Override
     public void send(String message) {

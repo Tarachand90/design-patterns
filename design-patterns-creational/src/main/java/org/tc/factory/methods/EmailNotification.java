@@ -1,6 +1,8 @@
-package org.tc.factory;
+package org.tc.factory.methods;
 
-public class EmailNotification implements Notification{
+import org.tc.factory.simple.Notification;
+
+public class EmailNotification implements Notification {
 
     @Override
     public void send(String message) {
