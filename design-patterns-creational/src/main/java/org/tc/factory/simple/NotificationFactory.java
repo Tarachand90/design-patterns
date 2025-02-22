@@ -1,4 +1,4 @@
-package org.tc.factory;
+package org.tc.factory.simple;
 
 public class NotificationFactory {
 
