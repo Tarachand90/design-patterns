@@ -4,13 +4,14 @@ package org.tc.factory.abstractt.dynamic.client;
 import org.tc.factory.abstractt.dynamic.Notification;
 import org.tc.factory.abstractt.dynamic.NotificationFactory;
 import org.tc.factory.abstractt.dynamic.provider.NotificationFactoryRegistry;
+import org.tc.factory.abstractt.dynamic.types.FactoryType;
 
 public class NotificationService {
     private NotificationFactory factory;
 
-    public NotificationService(String factoryType) {
+    public NotificationService(FactoryType factoryType) {
 
-        this.factory = NotificationFactoryRegistry.getFactory(factoryType);
+        this.factory = NotificationFactoryRegistry.getInstance().getFactory(factoryType);
     }
 
     public void sendEmailNotification(String message) {

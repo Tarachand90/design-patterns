@@ -1,6 +1,7 @@
 package org.tc.factory.abstractt.dynamic.provider;
 
 import org.tc.factory.abstractt.dynamic.NotificationFactory;
+import org.tc.factory.abstractt.dynamic.types.FactoryType;
 
 import java.util.Map;
 import java.util.ServiceLoader;
@@ -8,14 +9,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class NotificationFactoryRegistry {
 
-    private static final Map<String, NotificationFactory> factoryMap =
+    private static final Map<FactoryType, NotificationFactory> factoryMap =
             new ConcurrentHashMap<>();
     private static volatile NotificationFactoryRegistry instance;
 
-    // Static block ensures registry is populated before any call to getFactory()
-    static {
-        getInstance();  // Triggers initialization
-    }
 
     private NotificationFactoryRegistry() {
         // Load factories dynamically
@@ -38,8 +35,9 @@ public class NotificationFactoryRegistry {
         return instance;
     }
 
-    public static NotificationFactory getFactory(String factoryType) {
-        if(!factoryMap.containsKey(factoryType)) {
+    public static NotificationFactory getFactory(FactoryType factoryType) {
+        NotificationFactory factory = factoryMap.get(factoryType);
+        if(factory == null) {
             throw new IllegalArgumentException("Unknown Factory Type: " + factoryType);
         }
 

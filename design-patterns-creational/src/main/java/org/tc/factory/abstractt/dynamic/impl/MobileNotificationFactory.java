@@ -5,6 +5,7 @@ import org.tc.factory.abstractt.dynamic.NotificationFactory;
 import org.tc.factory.abstractt.dynamic.mobile.MobileEmailNotification;
 import org.tc.factory.abstractt.dynamic.mobile.MobilePushNotification;
 import org.tc.factory.abstractt.dynamic.mobile.MobileSMSNotification;
+import org.tc.factory.abstractt.dynamic.types.FactoryType;
 
 public class MobileNotificationFactory implements NotificationFactory {
 
@@ -24,7 +25,7 @@ public class MobileNotificationFactory implements NotificationFactory {
     }
 
     @Override
-    public String getFactoryType() {
-        return "mobile";
+    public FactoryType getFactoryType() {
+        return FactoryType.MOBILE;
     }
 }
