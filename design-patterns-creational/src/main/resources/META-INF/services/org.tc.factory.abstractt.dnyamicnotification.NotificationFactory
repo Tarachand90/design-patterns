@@ -1,0 +1,2 @@
+org.tc.factory.abstractt.dnyamicnotification.impl.MobileNotificationFactory
+org.tc.factory.abstractt.dnyamicnotification.impl.WebNotificationFactory
