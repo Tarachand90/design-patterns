@@ -10,12 +10,20 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class NotificationFactoryRegistry {
 
+    private static class Holder {
+        private static final NotificationFactoryRegistry INSTANCE = new NotificationFactoryRegistry();
+    }
+
+
     private static final Map<PlatformType, NotificationFactory> factoryMap =
             new ConcurrentHashMap<>();
-    private static volatile NotificationFactoryRegistry instance;
 
 
     private NotificationFactoryRegistry() {
+
+        if(Holder.INSTANCE != null) {
+            throw new IllegalStateException("Cannot create multiple instances of Singleton");
+        }
         // Load factories dynamically
         ServiceLoader<NotificationFactory> loader =
                 ServiceLoader.load(NotificationFactory.class);
@@ -26,14 +34,8 @@ public class NotificationFactoryRegistry {
     }
 
     public static NotificationFactoryRegistry getInstance() {
-        if (instance == null) {
-            synchronized (NotificationFactoryRegistry.class) {
-                if(instance == null) {
-                    instance = new NotificationFactoryRegistry();
-                }
-            }
-        }
-        return instance;
+
+        return Holder.INSTANCE;
     }
 
     public static NotificationFactory getFactory(PlatformType factoryType) {
